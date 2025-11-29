@@ -56,3 +56,13 @@ class Movie(db.Model):
         lazy="select",
     )
 
+    def to_dict(self):
+        return {
+                "id": self.id,
+                "title": self.title,
+                "description": self.description,
+                "release_year": self.release_year,
+                "rating": self.rating,
+                "director": self.director.name if self.director else None,
+                "actors": [a.name for a in self.actors],
+        }
